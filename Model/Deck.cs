@@ -10,7 +10,6 @@ internal class Deck
         InitializeDeck();
     }
 
-    // Gera todas as cartas do UNO e as adiciona ao baralho
     private void InitializeDeck()
     {
         string[] colors = { "Red", "Blue", "Green", "Yellow" };

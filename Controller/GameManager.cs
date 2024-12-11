@@ -8,12 +8,12 @@ namespace Zwei.Controller;
 internal class GameManager
 {
 
-    private Deck Deck; // O baralho do jogo
-    private List<Player> Players; // Lista de jogadores
-    private Stack<Card> DiscardPile; // Pilha de descarte
-    private int CurrentPlayerIndex; // Índice do jogador atual
-    private bool ReverseOrder; // Controla se a ordem está invertida
-    private TurnManager _turnmanager;
+    internal Deck Deck; // O baralho do jogo
+    internal List<Player> Players; // Lista de jogadores
+    internal Stack<Card> DiscardPile; // Pilha de descarte
+    internal int CurrentPlayerIndex; // Índice do jogador atual
+    internal bool ReverseOrder; // Controla se a ordem está invertida
+    internal TurnManager _turnmanager;
 
     public GameManager(List<string> playerNames)
     {
@@ -48,76 +48,20 @@ internal class GameManager
     }
 
     // Retorna o jogador atual
-    private Player GetCurrentPlayer()
+    public Player GetCurrentPlayer()
     {
         return Players[CurrentPlayerIndex];
     }
-
-    // Move para o próximo jogador
-    private void NextPlayer()
-    {
-        if (ReverseOrder)
-            CurrentPlayerIndex = (CurrentPlayerIndex - 1 + Players.Count) % Players.Count;
-        else
-            CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
-    }
-
-    // Realiza o turno do jogador atual
-    public void PlayTurn()
-    {
-        {
-            var currentPlayer = GetCurrentPlayer();
-            Console.WriteLine($"\nTurno de {currentPlayer.Name}");
-            Console.WriteLine($"Mão atual: {string.Join(", ", currentPlayer.Hand)}");
-
-            // Exibe a carta no topo da pilha de descarte
-            Console.WriteLine($"Carta no topo da pilha de descarte: {DiscardPile.Peek()}");
-
-            // Solicita ao jogador que escolha uma carta válida para jogar
-            Console.WriteLine("Escolha a carta que deseja jogar (digite o índice da carta, começando de 0):");
-            for (int i = 0; i < currentPlayer.Hand.Count; i++)
-            {
-                Console.WriteLine($"{i}: {currentPlayer.Hand[i]}");
-            }
-
-            int chosenIndex;
-            bool validChoice = false;
-
-            // Loop para garantir que a escolha do jogador seja válida
-            while (!validChoice)
-            {
-                if (int.TryParse(Console.ReadLine(), out chosenIndex) && chosenIndex >= 0 && chosenIndex < currentPlayer.Hand.Count)
-                {
-                    Card chosenCard = currentPlayer.Hand[chosenIndex];
-
-                    // Verifica se a carta escolhida é válida para jogar
-                    if (chosenCard.Color == DiscardPile.Peek().Color || chosenCard.Value == DiscardPile.Peek().Value)
-                    {
-                        currentPlayer.PlayCard(chosenCard);
-                        DiscardPile.Push(chosenCard);
-                        Console.WriteLine($"{currentPlayer.Name} jogou {chosenCard}");
-                        validChoice = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Carta inválida. Escolha outra carta que combine com a cor ou valor.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Escolha inválida. Por favor, digite um número válido.");
-                }
-            }
-
-            NextPlayer(); // Passa para o próximo jogador
-        }
-    }
-
 
     // Verifica se há um vencedor
     public Player CheckWinner()
     {
         return Players.FirstOrDefault(player => player.Hand.Count == 0);
+    }
+
+    public Stack<Card> GetDiscardPile()
+    {
+        return DiscardPile;
     }
 }
 

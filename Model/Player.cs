@@ -12,24 +12,21 @@ internal class Player
         Hand = new List<Card>();
     }
 
-    // Adiciona uma carta à mão do jogador
     public void DrawCard(Card card)
     {
         Hand.Add(card);
     }
 
-    // Remove uma carta específica da mão
     public bool PlayCard(Card card)
     {
         if (Hand.Contains(card))
         {
             Hand.Remove(card);
-            return true; // Carta foi jogada
+            return true;
         }
-        return false; // Carta não estava na mão
+        return false;
     }
 
-    // Exibe a mão do jogador como texto
     public override string ToString()
     {
         return $"{Name}'s hand: {string.Join(", ", Hand)}";

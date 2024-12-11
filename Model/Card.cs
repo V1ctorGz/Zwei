@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using System.Runtime.ConstrainedExecution;
-
-namespace Zwei.Model;
+﻿namespace Zwei.Model;
 
 internal class Card
 {

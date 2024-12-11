@@ -28,12 +28,12 @@ namespace Zwei
 
             // Inicializa o GameManager com a lista de jogadores
             GameManager gameManager = new GameManager(playersList);
-
-            // Simula turnos até que um jogador vença
+            TurnManager turnManager = new TurnManager(gameManager);
+            
             Player winner = null;
             while (winner == null)
             {
-                gameManager.PlayTurn();
+                turnManager.PlayTurn();
                 winner = gameManager.CheckWinner();
 
                 if (winner != null)
