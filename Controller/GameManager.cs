@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zwei.Model;
 
-namespace Zwei.Model;
+namespace Zwei.Controller;
 
 internal class GameManager
 {
@@ -12,6 +13,7 @@ internal class GameManager
     private Stack<Card> DiscardPile; // Pilha de descarte
     private int CurrentPlayerIndex; // Índice do jogador atual
     private bool ReverseOrder; // Controla se a ordem está invertida
+    private TurnManager _turnmanager;
 
     public GameManager(List<string> playerNames)
     {
@@ -110,7 +112,7 @@ internal class GameManager
             NextPlayer(); // Passa para o próximo jogador
         }
     }
- 
+
 
     // Verifica se há um vencedor
     public Player CheckWinner()
