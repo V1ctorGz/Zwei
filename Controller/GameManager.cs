@@ -26,10 +26,8 @@ internal class GameManager
         StartGame();
     }
 
-    // Inicializa o jogo distribuindo cartas aos jogadores
     private void StartGame()
     {
-        // Cada jogador compra 7 cartas
         for (int i = 0; i < 7; i++)
         {
             foreach (var player in Players)
@@ -39,12 +37,11 @@ internal class GameManager
             }
         }
 
-        // Coloca a primeira carta do baralho na pilha de descarte
         Card firstCard = Deck.Cards.Last();
         Deck.Cards.RemoveAt(Deck.Cards.Count - 1);
         DiscardPile.Push(firstCard);
 
-        Console.WriteLine($"Primeira carta da pilha de descarte: {firstCard}");
+        Console.WriteLine($"Primeira carta da pilha: {firstCard}");
     }
 
     // Retorna o jogador atual
@@ -56,7 +53,7 @@ internal class GameManager
     // Verifica se há um vencedor
     public Player CheckWinner()
     {
-        return Players.FirstOrDefault(player => player.Hand.Count == 0);
+        return Players.FirstOrDefault(player => player.Hand.Count == 0)!;
     }
 
     public Stack<Card> GetDiscardPile()
